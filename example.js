@@ -1,6 +1,6 @@
-import { getKeyValuePair } from './index.js';
+import { parseKeyValueString } from './index.js';
 
-/* const singleEntryResults = getKeyValuePair(
+/* const singleEntryResults = parseKeyValueString(
   `---------------
   Path: /net/openvpn/v3/sessions
   Created: Tue Nov 21 16:34:14: 2023    Owner: joydip    Device: tun0
@@ -10,9 +10,9 @@ import { getKeyValuePair } from './index.js';
 ---------------`
 );
 
-console.log(singleEntryResults);
+console.log(singleEntryResults); */
 
-const multipleEntryResults = getKeyValuePair(
+const multipleEntryResults = parseKeyValueString(
   `---------------
   Path: /net/openvpn/v3/sessions
   Created: Tue Nov 22 12:34:14: 2023    Owner: joydip    Device: tun0
@@ -28,10 +28,9 @@ const multipleEntryResults = getKeyValuePair(
 ---------------`
 );
 
-console.log(multipleEntryResults); */
+console.log(multipleEntryResults);
 
-
-const singleEntryWithExtraWhitespaceResults = getKeyValuePair(
+/* const singleEntryWithExtraWhitespaceResults = parseKeyValueString(
   `---------------
   Path: /net/openvpn/v3/sessions
   Created: Tue Nov 21 16:34:14: 2023            PID: 1229
@@ -39,7 +38,6 @@ const singleEntryWithExtraWhitespaceResults = getKeyValuePair(
   Config name: /etc/openvpn/profile.ovpn  (Config not available)
   Session name: vpn.mml.cloud
   Status: Connection, Client connected
----------------`
-);
+---------------`);
 
-console.log(singleEntryWithExtraWhitespaceResults)
+console.log(singleEntryWithExtraWhitespaceResults) */

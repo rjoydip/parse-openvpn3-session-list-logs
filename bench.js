@@ -1,5 +1,5 @@
 import { Bench } from 'tinybench';
-import { getKeyValuePair } from './index.js';
+import { parseKeyValueString } from './index.js';
 
 const bench = new Bench({ time: 100 });
 const inputString = `
@@ -14,12 +14,12 @@ const inputString = `
 
 bench
   .add('get key-value pair with sanitize (faster)', () => {
-    getKeyValuePair(inputString, {
+    parseKeyValueString(inputString, {
       sanitize: true,
     });
   })
   .add('get key-value pair without sanitize (slower)', async () => {
-    getKeyValuePair(inputString, {
+    parseKeyValueString(inputString, {
       sanitize: false,
     });
   });

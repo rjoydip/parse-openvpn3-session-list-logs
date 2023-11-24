@@ -1,36 +1,39 @@
-export function sanatizeString(str) {
-  return str.replace(/^-+$/gm, '').trim();
+export function sanitizeInputString(inputString) {
+  return inputString.replace(/^-+$/gm, '').trim();
 }
 
-function extractKeyVal(ele) {
-  if (Array.isArray(ele)) {
-    return ele.map((item) => extractKeyVal(item));
+function extractKeyValuePairs(element) {
+  if (Array.isArray(element)) {
+    return element.map(item => extractKeyValuePairs(item));
   } else {
-    let match = /^([\w|\s]+):\s*([^(\n|$)]*)/g.exec(ele.trim());
+    const keyValuePattern = /^([\w\s]+):\s*([^(\n|$)]*)/g;
+    const match = keyValuePattern.exec(element.trim());
+
     if (match !== null) {
-      return {
-        [match[1].trim()]: match[2].trim(),
-      };
-    } else ele;
+      const [_, key, value] = match.map(part => part.trim());
+      return { [key]: value };
+    } else {
+      return element;
+    }
   }
 }
 
-export function getKeyValuePair(str = '') {
-  if (str === '') return {};
+export function parseKeyValueString(inputString = '') {
+  if (inputString === '') return {};
 
-  const convertedStringToArray = sanatizeString(str)
-    .split('\n\n')
-    .map((i) =>
-      [].concat(
-        ...i
-          .split('\n')
-          .map((ele) =>
-            !!/\s{4}\w+:/.test(ele.trim())
-              ? ele.trim().split(/\s{4}/)
-              : ele.trim()
-          )
-      ).filter(Boolean)
-    );
+  const sanitizedString = sanitizeInputString(inputString);
+  const splitSections = sanitizedString.split('\n\n');
 
-  return extractKeyVal(convertedStringToArray);
+  const convertedArray = splitSections.map(section =>
+    [].concat(
+      ...section.split('\n').map(line =>
+        /\s{4}\w+:/.test(line.trim())
+          ? line.trim().split(/\s{4}/)
+          : line.trim()
+      )
+    ).filter(Boolean)
+  );
+
+  const keyValueResult = extractKeyValuePairs(convertedArray);
+  return keyValueResult.map(item => Object.assign({}, ...item));
 }
