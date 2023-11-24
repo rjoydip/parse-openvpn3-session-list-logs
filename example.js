@@ -1,6 +1,6 @@
 import { getKeyValuePair } from './index.js';
 
-const singleEntryResults = getKeyValuePair(
+/* const singleEntryResults = getKeyValuePair(
   `---------------
   Path: /net/openvpn/v3/sessions
   Created: Tue Nov 21 16:34:14: 2023    Owner: joydip    Device: tun0
@@ -28,4 +28,18 @@ const multipleEntryResults = getKeyValuePair(
 ---------------`
 );
 
-console.log(multipleEntryResults);
+console.log(multipleEntryResults); */
+
+
+const singleEntryWithExtraWhitespaceResults = getKeyValuePair(
+  `---------------
+  Path: /net/openvpn/v3/sessions
+  Created: Tue Nov 21 16:34:14: 2023            PID: 1229
+  Owner: joydip                             Device: tun0
+  Config name: /etc/openvpn/profile.ovpn  (Config not available)
+  Session name: vpn.mml.cloud
+  Status: Connection, Client connected
+---------------`
+);
+
+console.log(singleEntryWithExtraWhitespaceResults)

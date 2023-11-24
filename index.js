@@ -29,7 +29,7 @@ export function getKeyValuePair(str = '') {
               ? ele.trim().split(/\s{4}/)
               : ele.trim()
           )
-      )
+      ).filter(Boolean)
     );
 
   return extractKeyVal(convertedStringToArray);
