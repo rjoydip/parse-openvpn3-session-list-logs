@@ -1,0 +1,16 @@
+{
+  "name": "parse-openvpn3-session-list-logs",
+  "private": true,
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "bench": "node bench.js",
+    "example": "node example.js",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "tinybench": "^2.5.1",
+    "vitest": "^0.34.6"
+  }
+}
